@@ -1,4 +1,8 @@
 pandas
 requests
 SQLAlchemy
-psycopg2
+asyncpg
+psycopg
+psycopg-binary
+alembic
+python-dotenv

@@ -1,6 +1,6 @@
 
 from countries_list import countries_list
-
+from sqlalchemy_config import engine
 
 def load_new_cities(countriesList):
     lat = None
