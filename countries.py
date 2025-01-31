@@ -6,6 +6,3 @@ countries_dict = {
     "US":{"Washington":[38.9047,-77.0163],"New York":[40.6943,-73.9249],"Phoenix":[33.5722,-112.0892]},
     "Germany":{"Berlin":[52.5200,13.4050],"Frankfurt":[50.1106,8.6822],"Munich":[48.1375,11.5750]}
 }
-
-# for country,city_dict in countries_dict.items():
-#     print(country)

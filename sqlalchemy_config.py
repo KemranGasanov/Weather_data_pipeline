@@ -14,11 +14,4 @@ engine=create_engine(
     max_overflow=10
 )
 
-# with engine.connect() as conn:
-#     res = conn.execute(text(
-#     "SELECT "
-#     f"'{description}'"
-#      ))
-#     print(res.all())
-#     conn.commit()
 
