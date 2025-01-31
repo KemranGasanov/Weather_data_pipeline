@@ -4,12 +4,18 @@ import requests as req
 import csv
 import os
 
-def etl_current():
+def etl(timeframe='current'):
+    if timeframe=='current':
+        url=f'https://api.openweathermap.org/data/2.5/weather'
+    elif timeframe=='4d_forecast':
+        url=f''
+    else:
+        raise Exception("Invalid timeframe, options: current, 4d_forecast!")
     with open(fr"city_id.csv") as csv_file:
         csv_reader = csv.reader(csv_file)
         with engine.connect() as conn:
             for row in csv_reader:
-                res = req.get(f"https://api.openweathermap.org/data/2.5/weather?lat={row[3]}&lon={row[4]}&appid={os.getenv('OPEN_WEATHER_KEY')}").json()
+                res = req.get(f"{url}?lat={row[3]}&lon={row[4]}&appid={os.getenv('OPEN_WEATHER_KEY')}").json()
                 #Check if all the data is present
                 try:
                     wind_speed=f"{res['wind']['speed']} as wind_speed,"
@@ -32,13 +38,18 @@ def etl_current():
                 except:
                     clouds=f"NULL as clouds,"
                 #
-
-                if len(res["weather"]) == 1:
-                    conn.execute(text(f"""
-                        INSERT INTO f_all_data (city_id,weather_id,temp,feels_like,temp_min,temp_max,pressure,humidity,sea_level,grnd_level,wind_speed,wind_deg,wind_gust,rain,clouds,time_zone)
+                if len(res["weather"])>1:
+                    weather_id="{"
+                    for entry in res["weather"]:
+                        weather_id+=f"{entry['id']},"
+                    weather_id=(weather_id[::-1].replace(',','',1)[::-1])
+                    weather_id+='}'
+                else: weather_id='{'+f"{res['weather'][0]['id']}"+'}'
+                conn.execute(text(f"""
+                        INSERT INTO f_all_data (city_id,weather_id,temp,feels_like,temp_min,temp_max,pressure,humidity,sea_level,grnd_level,wind_speed,wind_deg,wind_gust,rain,clouds,time_zone,creation_date)
                         SELECT 
                             {row[0]} as city_id,
-                            {res["weather"][0]["id"]} as weather_id,
+                            '{weather_id}'::INT[] as weather_id,
                             {res["main"]["temp"]} as temp,
                             {res["main"]["feels_like"]} as feels_like,
                             {res["main"]["temp_min"]} as temp_min,
@@ -52,9 +63,10 @@ def etl_current():
                             {wind_gust}
                             {rain}
                             {clouds}
-                            {res["timezone"]} as time_zone
+                            {res["timezone"]} as time_zone,
+                            NOW() as creation_date
                     """))
-                    conn.commit()
+                conn.commit()
 
 
-etl_current()
+etl('current')

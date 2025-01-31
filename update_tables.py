@@ -1,11 +1,11 @@
 
 import csv
 from weather_list import weather_list
-from countries import countries_dict
 from sqlalchemy_config import engine,text
 
 def load_new_cities(countriesDict):
     """
+    DEPRECATED \n
     Update 'd_cities' table in the connected DB
     then update 'city_id's file
     :param countriesDict:
@@ -36,7 +36,7 @@ def update_local_city_data():
     """
     with engine.connect() as conn:
         #Update 'city_id's in countries file
-        with open(f"city_id.csv",'r+') as city_id_csv_file:
+        with open(f"city_id.csv",'w') as city_id_csv_file:
             res = conn.execute(text(
 f"""
 SELECT id,city_name,country_name,lat,lon
@@ -54,5 +54,6 @@ def load_new_weather(weather_list):
             """))
             conn.commit()
 
+#update_local_city_data()
 #load_new_weather(weather_list)
 #load_new_cities(countries_dict)
