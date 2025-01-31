@@ -29,11 +29,17 @@ def load_new_cities(countriesDict):
                                 """))
                     conn.commit()
 
+def update_local_city_data():
+    """
+    Gets (id,city_name,country_name,lat,lon) and saves it locally in 'city_id'
+    :return:
+    """
+    with engine.connect() as conn:
         #Update 'city_id's in countries file
         with open(f"city_id.csv",'r+') as city_id_csv_file:
             res = conn.execute(text(
 f"""
-SELECT id,city_name,country_name
+SELECT id,city_name,country_name,lat,lon
 from d_cities
 """))
             for entry in res:
