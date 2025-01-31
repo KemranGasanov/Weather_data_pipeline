@@ -1,14 +1,13 @@
 
-import os
 import csv
-import pandas as pd
+from weather_list import weather_list
 from countries import countries_dict
 from sqlalchemy_config import engine,text
 
 def load_new_cities(countriesDict):
     """
     Update 'd_cities' table in the connected DB
-    then update 'city_id's in 'countries' file
+    then update 'city_id's file
     :param countriesDict:
     :return:
     """
@@ -40,10 +39,14 @@ from d_cities
             for entry in res:
                 csv.writer(city_id_csv_file,lineterminator='\n').writerow(entry)
 
+def load_new_weather(weather_list):
+    with engine.connect() as conn:
+        for item in weather_list:
+            conn.execute(text(f"""
+            INSERT INTO d_weather (id,condition,description)
+            SELECT {item[0]} as id,'{item[1]}' as condition,'{item[2]}' as description
+            """))
+            conn.commit()
 
-
-
-def load_new_weather():
-    pass
-
-load_new_cities(countries_dict)
+#load_new_weather(weather_list)
+#load_new_cities(countries_dict)
