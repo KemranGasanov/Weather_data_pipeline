@@ -3,4 +3,3 @@ linux_venvs/
 
 .env
 .gitignore
-/countries.py
