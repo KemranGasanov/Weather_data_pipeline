@@ -8,7 +8,7 @@ def etl(timeframe='current'):
     if timeframe=='current':
         url=f'https://api.openweathermap.org/data/2.5/weather'
     elif timeframe=='4d_forecast':
-        url=f''
+        url=f'' #TODO add new forecast functionality...
     else:
         raise Exception("Invalid timeframe, options: current, 4d_forecast!")
     with open(fr"city_id.csv") as csv_file:
@@ -67,6 +67,3 @@ def etl(timeframe='current'):
                             NOW() as creation_date
                     """))
                 conn.commit()
-
-
-etl('current')

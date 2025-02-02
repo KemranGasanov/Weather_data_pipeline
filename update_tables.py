@@ -54,6 +54,6 @@ def load_new_weather(weather_list):
             """))
             conn.commit()
 
-#update_local_city_data()
+update_local_city_data()
 #load_new_weather(weather_list)
 #load_new_cities(countries_dict)
