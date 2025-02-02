@@ -1,7 +1,7 @@
 
 import csv
-from weather_list import weather_list
-from sqlalchemy_config import engine,text
+from data.weather_list import weather_list
+from config.sqlalchemy_config import engine,text
 
 def load_new_cities(countriesDict):
     """
@@ -36,7 +36,7 @@ def update_local_city_data():
     """
     with engine.connect() as conn:
         #Update 'city_id's in countries file
-        with open(f"city_id.csv",'w') as city_id_csv_file:
+        with open(f"../data/city_id.csv", 'w') as city_id_csv_file:
             res = conn.execute(text(
 f"""
 SELECT id,city_name,country_name,lat,lon
