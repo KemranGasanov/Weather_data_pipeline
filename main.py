@@ -1,8 +1,8 @@
 
-
+from extract_data_request import etl
 
 def main():
-    pass
+    etl()
 
 if '__name__' == '__main__':
     main()
