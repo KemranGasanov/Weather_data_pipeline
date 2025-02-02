@@ -1,5 +1,5 @@
 /testing_files/
 linux_venvs/
-
+.idea/
 .env
 .gitignore
