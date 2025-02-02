@@ -1,5 +1,5 @@
 
-from sqlalchemy_config import engine,text
+from config.sqlalchemy_config import engine,text
 import requests as req
 import csv
 import os
@@ -11,7 +11,7 @@ def etl(timeframe='current'):
         url=f'' #TODO add new forecast functionality...
     else:
         raise Exception("Invalid timeframe, options: current, 4d_forecast!")
-    with open(fr"city_id.csv") as csv_file:
+    with open(fr"../city_id.csv") as csv_file:
         csv_reader = csv.reader(csv_file)
         with engine.connect() as conn:
             for row in csv_reader:
