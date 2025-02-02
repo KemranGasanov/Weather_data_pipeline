@@ -2,5 +2,3 @@
 .env
 .gitignore
 /countries.py
-/city_id.csv
-/weather_list.py
