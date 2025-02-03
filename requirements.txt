@@ -4,4 +4,4 @@ SQLAlchemy==2.0.37
 psycopg==3.2.4
 psycopg-binary==3.2.4
 python-dotenv==1.0.1
-apache-airflow==2.10.2
+apache-airflow==2.10.4
