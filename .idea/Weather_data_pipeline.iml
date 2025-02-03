@@ -4,7 +4,7 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/testing_files" />
     </content>
-    <orderEntry type="jdk" jdkName="D:\Programms\Python\python.exe" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.10.12 WSL (Ubuntu-22.04): (/mnt/d/My_projects/24_Data_Engineer_Stack/Weather_data_pipeline/linux_venvs/bin/python)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

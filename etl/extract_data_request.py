@@ -11,7 +11,7 @@ def etl(timeframe='current'):
         url=f'' #TODO add new forecast functionality...
     else:
         raise Exception("Invalid timeframe, options: current, 4d_forecast")
-    with open(fr"../city_id.csv") as csv_file:
+    with open(fr"../data/city_id.csv") as csv_file:
         csv_reader = csv.reader(csv_file)
         #Try adding new data
         with engine.connect() as conn:
