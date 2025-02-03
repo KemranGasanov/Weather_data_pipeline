@@ -77,3 +77,4 @@ def etl(timeframe='current'):
                 print(fr"{ex}")
             finally:
                 conn.close()
+                raise Exception("ETL process failed")
