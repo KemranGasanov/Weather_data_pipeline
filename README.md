@@ -10,7 +10,8 @@
 - Поддержка текущих и исторических погодных данных.
 - Обновление локального списка городов и погодных условий.
 
-![picture.jpg](docs/picture.jpg)
+![overview.jpg](docs/overview.jpg)
+![tables.jpg](docs/tables.jpg)
 
 ## Структура проекта
 ```
